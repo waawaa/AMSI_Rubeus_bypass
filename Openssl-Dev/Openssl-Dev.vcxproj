@@ -140,6 +140,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="defs.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="sha256.h" />
   </ItemGroup>

